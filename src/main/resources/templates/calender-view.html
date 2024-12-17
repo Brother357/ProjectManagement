@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Calendar View</title>
+</head>
+<body>
+<h1>Project Calendar</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Project</th>
+    <th>Interval</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="entry : ${schedule}">
+    <td th:text="${entry.key.name}"></td>
+    <td th:text="${entry.value}"></td>
+  </tr>
+  </tbody>
+</table>
+<form action="/calendar/add" method="post">
+  <input type="text" name="projectName" placeholder="Project Name" required>
+  <input type="text" name="interval" placeholder="Interval (e.g., Jan-Feb)" required>
+  <button type="submit">Add to Calendar</button>
+</form>
+<p th:if="${message}" th:text="${message}"></p>
+</body>
+</html>

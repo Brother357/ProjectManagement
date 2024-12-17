@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Team Groups</title>
+</head>
+<body>
+<h1>Team Groups</h1>
+<ul>
+  <li th:each="group : ${teamGroups}">
+    <span th:text="${group.name}"></span>
+  </li>
+</ul>
+<form action="/team-group/add" method="post">
+  <input type="text" name="name" placeholder="Team Group Name" required>
+  <button type="submit">Add Team Group</button>
+</form>
+<p th:if="${message}" th:text="${message}"></p>
+</body>
+</html>

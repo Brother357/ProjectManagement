@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Project List</title>
+</head>
+<body>
+<h1>Project List</h1>
+
+<!-- Project List Display -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Deadline</th>
+    <th>Duration</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="project : ${projects}">
+    <td th:text="${project.id}"></td>
+    <td th:text="${project.name}"></td>
+    <td th:text="${project.deadline}"></td>
+    <td th:text="${project.duration}"></td>
+    <td>
+      <!-- Nested loop: Show employees under each project -->
+      <ul>
+        <li th:each="employee : ${employees}">
+          <span th:text="${employee.name} + ' (' + ${employee.role} + ')'"></span>
+        </li>
+      </ul>
+      <p th:if="${employees == null or employees.isEmpty()}">No employees assigned</p>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- Add Project Form -->
+<h2>Add New Project</h2>
+<form th:action="@{/project/add}" method="post">
+  <label for="name">Project Name:</label>
+  <input type="text" id="name" name="name" placeholder="Project Name" required>
+  <br>
+  <label for="deadline">Deadline:</label>
+  <input type="date" id="deadline" name="deadline" required>
+  <br>
+  <label for="duration">Duration:</label>
+  <input type="text" id="duration" name="duration" placeholder="Duration" required>
+  <br>
+  <button type="submit">Add Project</button>
+</form>
+
+<!-- Success/Failure Message -->
+<p th:if="${message}" th:text="${message}"></p>
+
+<!-- Display Employees -->
+<h3>Update Employee Role</h3>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Update Role</th>
+  </tr>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.id}"></td>
+    <td th:text="${employee.name}"></td>
+    <td th:text="${employee.role}"></td>
+    <td>
+      <!-- Form to update role -->
+      <form th:action="@{/project/employee/update-role}" method="post">
+        <input type="hidden" name="employeeId" th:value="${employee.id}">
+        <input type="text" name="newRole" placeholder="New Role" required>
+        <button type="submit">Update</button>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+</body>
+</html>
