@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Project Details</title>
+</head>
+<body>
+<h1 th:text="${project.name}"></h1>
+<p>ID: <span th:text="${project.id}"></span></p>
+<p>Deadline: <span th:text="${project.deadline}"></span></p>
+<p>Duration: <span th:text="${project.duration}"></span></p>
+<a href="/project/list">Back to list</a>
+</body>
+</html>

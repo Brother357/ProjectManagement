@@ -1,10 +1,16 @@
 package com.example.projectmanagement.Controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.projectmanagement.Model.Project;
 import com.example.projectmanagement.services.ProjectService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/project")
@@ -55,9 +61,13 @@ public class ProjectController {
         projectService.updateEmployeeRole(employeeId, newRole);
         return "redirect:/project/list"; // Redirect back to the project list or employee list
     }
+  /*
+  
     @PostMapping("/delete/{id}")
     public String deleteProject(@PathVariable("id") int id) {
         projectService.deleteProject(id);
         return "redirect:/project/list"; // Redirect back to the project list
     }
+
+     */
 }
